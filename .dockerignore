@@ -1,0 +1,11 @@
+.git
+.env
+__pycache__
+*.pyc
+.pytest_cache
+tests
+.venv
+backup_*.sql
+smoke.db
+*.db
+README.md

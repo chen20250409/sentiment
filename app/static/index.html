@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>电商评价情绪分析</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <span class="logo">🛒 评价情绪分析</span>
+      <span class="subtitle">正向 / 负面 / 中性 · 附带置信度</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>输入评价文本</h2>
+      <textarea id="input-text" rows="4" maxlength="2000"
+        placeholder="粘贴一条商品评价，例如：物流很快，包装严实，质量超出预期！"></textarea>
+      <div class="input-foot">
+        <span id="char-count">0 / 2000</span>
+        <button id="btn-analyze" class="btn primary">开始分析</button>
+      </div>
+      <div id="error" class="error hidden"></div>
+
+      <div id="result" class="result hidden">
+        <div class="result-head">
+          <span id="badge" class="badge">—</span>
+          <span class="conf-label">置信度</span>
+          <div class="conf-bar"><div id="conf-fill" class="conf-fill"></div></div>
+          <span id="conf-value" class="conf-value">0%</span>
+        </div>
+        <div class="result-body">
+          <div class="kv"><span class="k">原文</span><p id="result-text"></p></div>
+          <div class="kv"><span class="k">命中词</span><div id="hit-words" class="chips"></div></div>
+          <div class="kv"><span class="k">分析时间</span><p id="result-time"></p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>历史记录</h2>
+      <div class="filters">
+        <select id="f-polarity">
+          <option value="">全部情绪</option>
+          <option value="positive">正向</option>
+          <option value="negative">负面</option>
+          <option value="neutral">中性</option>
+        </select>
+        <input id="f-q" type="text" placeholder="搜索关键词" />
+        <button id="btn-refresh" class="btn">刷新</button>
+      </div>
+      <table class="records">
+        <thead>
+          <tr><th>时间</th><th>内容摘要</th><th>情绪</th><th>置信度</th><th></th></tr>
+        </thead>
+        <tbody id="records-body"></tbody>
+      </table>
+      <div class="pager">
+        <button id="btn-prev" class="btn">上一页</button>
+        <span id="page-info">-</span>
+        <button id="btn-next" class="btn">下一页</button>
+      </div>
+    </section>
+  </main>
+
+  <div id="detail-mask" class="mask hidden">
+    <div class="detail card">
+      <div class="detail-head">
+        <h2>记录详情</h2>
+        <button id="btn-close" class="btn ghost">关闭</button>
+      </div>
+      <div class="kv"><span class="k">原文</span><p id="d-content"></p></div>
+      <div class="kv"><span class="k">情绪</span><p><span id="d-badge" class="badge"></span> 置信度 <b id="d-conf"></b> · 原始分 <b id="d-raw"></b></p></div>
+      <div class="kv"><span class="k">命中词</span><div id="d-hits" class="chips"></div></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
